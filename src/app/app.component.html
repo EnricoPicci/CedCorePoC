@@ -1,6 +1,40 @@
-<h1>
-  {{title}}
-</h1>
-<div><button (click)="payment()">Payment</button></div>
-<div><button (click)="adv()">ADV</button></div>
-<router-outlet></router-outlet>
+<md-sidenav-layout>
+
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+      Logout
+  </md-sidenav>
+
+
+  <md-toolbar color="primary">
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+
+    Cedacri PoC Core Banking
+
+    <span class="app-toolbar-filler"></span>
+    <button md-button (click)="payment()">Pagamenti</button>
+    <button md-button (click)="adv()">ADV</button>
+  </md-toolbar>
+
+  <div class="app-content">
+    <!--md-card>
+      <md-tab-group>
+        <md-tab>
+          <template md-tab-label>
+            Earth
+          </template>
+        </md-tab>
+        <md-tab>
+          <template md-tab-label>
+            Fire
+          </template>
+        </md-tab>
+      </md-tab-group>
+    </md-card-->
+    <router-outlet></router-outlet>
+  </div>
+
+
+
+</md-sidenav-layout>

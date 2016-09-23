@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -7,16 +7,14 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
+  tabs = [
+    {id: 'sepa', label: 'SEPA', path: 'sepa'},
+    {id: 'mav', label: 'MAV', path: 'mav'}
+  ];
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor() {}
 
   ngOnInit() {
   }
 
-  sepa() {
-    this.router.navigate(['sepa'], { relativeTo: this.route });
-  }
-  mav() {
-    this.router.navigate(['mav'], { relativeTo: this.route });
-  }
 }

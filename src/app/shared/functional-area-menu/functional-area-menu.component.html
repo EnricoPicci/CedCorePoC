@@ -1,0 +1,9 @@
+<md-card>
+  <md-tab-group (selectChange)="onTabClick($event)" [selectedIndex]="selectedTabIndex">
+    <md-tab *ngFor="let tab of tabs">
+      <template md-tab-label>
+        {{tab.label}}
+      </template>
+    </md-tab>
+  </md-tab-group>
+</md-card>
