@@ -1,5 +1,5 @@
-//import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {CommonModule} from '@angular/common'; 
 
 import { PaymentComponent } from './payment.component';
 import { paymentRouting }  from './payment.routing';
@@ -16,6 +16,7 @@ import {SharedModule} from '../shared/shared.module';
     MavPaymentComponent
   ],
   imports: [
+    CommonModule, 
     paymentRouting,
     SharedModule
   ],

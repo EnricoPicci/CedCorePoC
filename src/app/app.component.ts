@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
-import {SessionService} from './session.service'
+import {SessionService} from './shared/session.service'
 
 @Component({
   selector: 'app-root',
@@ -9,13 +9,18 @@ import {SessionService} from './session.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
-  tabs = ['aa', 'ss'];
+  customerId = "123"
 
   constructor(
     private router: Router,
-    private session: SessionService
+    private session: SessionService,
+    private route: ActivatedRoute
   ) {}
+
+  ngOnInit() {
+    this.session.customerId = this.customerId;
+    console.log(this.route)
+  }
 
   payment() {
     this.router.navigate(['/payment']);

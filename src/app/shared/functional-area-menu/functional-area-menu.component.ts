@@ -11,7 +11,7 @@ import {MdTabChangeEvent} from '@angular2-material/tabs/tabs';
 })
 export class FunctionalAreaMenuComponent implements OnInit {
   tabs: Array<{id: string, label: string, path: string}>;
-  selectedTabIndex: number;
+  selectedTabIndex = 0;;
 
   constructor(private router: Router, private route: ActivatedRoute) { }
 

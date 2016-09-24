@@ -1,0 +1,14 @@
+<md-card class="app-input-section">
+  
+  <md-input placeholder="Nome" [disabled]="!searchMode" [value]="customer?.nome"></md-input>
+
+  <md-input placeholder="Cognome" [disabled]="!searchMode" [value]="customer?.cognome"></md-input>
+
+  <md-input maxlength="16" placeholder="NDG" [disabled]="!searchMode" [value]="customer?.ndg"></md-input>
+
+  <a (click)="setSearchMode()">
+    <img border="0" md-tooltip="Ricerca cliente" tooltip-position="below" 
+      src="./assets/images/search.png" width="30" height="30">
+  </a>
+
+</md-card>
