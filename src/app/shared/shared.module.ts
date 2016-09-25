@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {CommonModule} from '@angular/common'; 
+import { FormsModule } from '@angular/forms';
 
 import {MdTabsModule} from '@angular2-material/tabs/tabs';
 import {MdCardModule} from '@angular2-material/card/card';
@@ -19,6 +20,7 @@ import {ConfigurationService} from './configuration.service';
   ], 
   imports: [
     CommonModule,
+    FormsModule,
     MdTabsModule.forRoot(),
     MdCardModule.forRoot(),
     MdInputModule.forRoot(),

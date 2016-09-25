@@ -9,7 +9,6 @@ import {SessionService} from './shared/session.service'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  customerId = "123"
 
   constructor(
     private router: Router,
@@ -18,8 +17,10 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    this.session.customerId = this.customerId;
-    console.log(this.route)
+    this.route.queryParams.subscribe((params) => {
+      console.log('c', params);
+      this.session.customerId = params['id'];
+    })
   }
 
   payment() {

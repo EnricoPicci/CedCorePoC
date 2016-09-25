@@ -4,7 +4,7 @@ import { Observable }     from 'rxjs/Observable';
 import './rxjs-operators';
 
 import {RemoteServicesInterface} from '../remote-services-interface/remote-services.interface';
-import {Customer} from '../remote-services-interface/customer';
+import {Customer} from '../model/customer';
 import {ConfigurationService} from '../shared/configuration.service';
 
 @Injectable()
@@ -15,9 +15,9 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
         private configuration: ConfigurationService
     ) { }
 
-    getCustumer(id: string) {
+    getCustomer(id?: string, cognome?: string) {
         let url = this.configuration.baseServicesUrl + 'customer';
-        let jsonParam = {id: id};
+        let jsonParam = {id: id, cognome: cognome};
         return this.http.post(url, jsonParam, this.getOptions())
                     .map(this.extractData)
                     .map((json) => {

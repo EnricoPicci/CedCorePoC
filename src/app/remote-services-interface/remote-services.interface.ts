@@ -1,7 +1,7 @@
 import { Observable }     from 'rxjs/Observable';
 
-import {Customer} from './customer';
+import {Customer} from '../model/customer';
 
 export interface RemoteServicesInterface {
-  getCustumer(id: string): Observable<any>;
+  getCustomer(id?: string, cognome?: string): Observable<any>;
 }
