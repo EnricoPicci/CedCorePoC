@@ -12,12 +12,15 @@ import { CustomerSummaryComponent } from './customer-summary/customer-summary.co
 
 import {SessionService} from './session.service';
 import {ConfigurationService} from './configuration.service';
+import { IbanPipe } from './iban/iban.pipe';
+import { IbanComponent } from './iban/iban.component';
 
 @NgModule({
   declarations: [
     FunctionalAreaMenuComponent, 
-    CustomerSummaryComponent
-  ], 
+    CustomerSummaryComponent, 
+    IbanPipe, IbanComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -28,7 +31,14 @@ import {ConfigurationService} from './configuration.service';
   ],
   exports: [
     FunctionalAreaMenuComponent,
-    CustomerSummaryComponent
+    CustomerSummaryComponent,
+    IbanPipe, IbanComponent,
+    CommonModule,
+    FormsModule,
+    MdTabsModule,
+    MdCardModule,
+    MdInputModule,
+    MdTooltipModule
   ],
   providers: [SessionService, ConfigurationService]
 })

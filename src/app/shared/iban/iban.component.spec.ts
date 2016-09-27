@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { PaymentComponent } from './payment.component';
+import { IbanComponent } from './iban.component';
 
-/*describe('Component: Payment', () => {
+describe('Component: Iban', () => {
   it('should create an instance', () => {
-    let component = new PaymentComponent();
+    let component = new IbanComponent();
     expect(component).toBeTruthy();
   });
-});*/
+});

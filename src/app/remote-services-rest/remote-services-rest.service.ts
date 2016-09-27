@@ -5,6 +5,7 @@ import './rxjs-operators';
 
 import {RemoteServicesInterface} from '../remote-services-interface/remote-services.interface';
 import {Customer} from '../model/customer';
+import {ValidationResponse} from '../model/validation-response';
 import {ConfigurationService} from '../shared/configuration.service';
 
 @Injectable()
@@ -22,6 +23,17 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
                     .map(this.extractData)
                     .map((json) => {
                         return <Customer>json
+                    })
+                    .catch(this.handleError);
+    }
+
+    adv(customerId: string) {
+        let url = this.configuration.baseServicesUrl + 'adv';
+        let jsonParam = {customerId: customerId};
+        return this.http.post(url, jsonParam, this.getOptions())
+                    .map(this.extractData)
+                    .map((json) => {
+                        return <ValidationResponse>json
                     })
                     .catch(this.handleError);
     }

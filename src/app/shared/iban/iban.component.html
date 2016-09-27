@@ -1,0 +1,3 @@
+<input #ibanInput placeholder="IBAN" (keyup)="onKeyUp(ibanInput.value)" maxlength="27"
+      [class.invalid]="!valid" style="width: 50%" [(ngModel)]="iban"/>
+{{iban | iban}}

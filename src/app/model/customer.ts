@@ -1,7 +1,7 @@
 import {Rapporto} from './rapporto';
 
 export interface Customer {
-    id: string;
+    customerId: string;
     nome: string;
     cognome: string;
     ndg: string;

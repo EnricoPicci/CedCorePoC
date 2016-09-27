@@ -1,3 +1,17 @@
-<p>
-  sepa-payment works!
-</p>
+<div class="row">
+  <div class="col-sm-2 offset-sm-1">Beneficiario</div>
+  <div class="col-sm-4"><input class="app-pay-input" type="text"/></div>
+</div>
+<div class="row">
+  <div class="col-sm-2 offset-sm-1">Importo</div>
+  <div class="col-sm-4"><input class="app-pay-input" type="text"/></div>
+</div>
+<div class="row">
+  <div class="col-sm-2 offset-sm-1">Iban</div>
+  <div class="col-sm-8"><app-iban></app-iban></div>
+</div>
+<div class="row">
+  <div class="col-sm-2 offset-sm-6">
+    <button (click)="submitPayment()">Invia</button>
+  </div>
+</div>

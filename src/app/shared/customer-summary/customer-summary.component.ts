@@ -14,6 +14,7 @@ import {Customer} from '../../model/customer';
 export class CustomerSummaryComponent implements OnInit {
   searchMode = false;
   customer: Customer;
+  rapportoId: string;
 
   constructor(
     private session: SessionService,
@@ -21,14 +22,25 @@ export class CustomerSummaryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getCustomer(this.session.customerId);
+    let goToRemoteServer = (this.session.customerId != null && this.session.getCustomer() == null) ||
+                            (this.session.getCustomer() != null && 
+                                this.session.getCustomer().customerId != this.session.customerId);
+    if (goToRemoteServer) {
+      this.getCustomerFromRemoteServer(this.session.customerId);
+    } else {
+      if (this.session.getCustomer()) {
+        this.setCustomerForView(this.session.getCustomer());
+      } else {
+        this.setSearchMode();
+      }
+    }
   }
 
   search() {
     if (!this.searchMode) {
       this.setSearchMode();
     } else {
-      this.getCustomer(null, this.customer.cognome);
+      this.getCustomerFromRemoteServer(null, this.customer.cognome);
       this.disableSearchMode();
     }
   }
@@ -38,18 +50,22 @@ export class CustomerSummaryComponent implements OnInit {
   }
   disableSearchMode() {
     this.searchMode = false;
-    this.customer = this.session.customer;
+    this.customer = this.session.getCustomer();
   }
 
-  getCustomer(id?: string, cognome?: string) {
+  getCustomerFromRemoteServer(id?: string, cognome?: string) {
     this.server.getCustomer(id, cognome)
       .subscribe(
-        (result) => {
-          this.customer = result;
-          this.session.customer = this.customer;
+        (result: Customer) => {
+          this.setCustomerForView(result);
+          this.session.setCustomer(this.customer);
         },
         (error) => {console.log(error)}
       )
+  }
+  setCustomerForView(customer: Customer) {
+    this.customer = customer;
+    this.rapportoId = this.customer.rapporti[0].id;
   }
 
 }

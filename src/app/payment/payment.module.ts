@@ -7,13 +7,15 @@ import { PaymentHomeComponent } from './payment-home/payment-home.component';
 import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
 import { MavPaymentComponent } from './mav-payment/mav-payment.component';
 import {SharedModule} from '../shared/shared.module';
+import { PaymentValidationExceptionComponent } from './payment-validation-exception/payment-validation-exception.component';
 
 @NgModule({
   declarations: [
     PaymentComponent,
     PaymentHomeComponent,
     SepaPaymentComponent,
-    MavPaymentComponent
+    MavPaymentComponent,
+    PaymentValidationExceptionComponent
   ],
   imports: [
     CommonModule, 

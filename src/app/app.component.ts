@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import {SessionService} from './shared/session.service'
+import {SessionService} from './shared/session.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   constructor(
     private router: Router,
@@ -17,10 +17,14 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      console.log('c', params);
-      this.session.customerId = params['id'];
-    })
+    let subscription = this.route.queryParams.subscribe((params) => {
+      console.log('run the subscription one time');
+      if (params['id']) {
+        this.session.customerId = params['id'];
+        console.log('you should not run the subscription any more');
+        subscription.unsubscribe();
+      }
+    });
   }
 
   payment() {

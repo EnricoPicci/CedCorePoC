@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sepa-payment.component.css']
 })
 export class SepaPaymentComponent implements OnInit {
+  iban: string;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  submitPayment() {
+    console.log('Payment submitted')
   }
 
 }
