@@ -5,5 +5,23 @@
 }
 
 .app-pay-input {
-    width: 100%;
+  width: 100%;
+}
+
+.a2component {
+  border-width: thick;
+  border-style: solid;
+  /*border-style: none;*/
+  border-color: red;
+}
+.a2componentname {
+  color: darkred;
+  font-size: large;
+  font-weight: bold;
+  font-style: italic;
+  border-width: thin;
+  border-style: solid;
+  border-color: darkred;
+  background-color: lightgray;
+  /*display: none;*/
 }

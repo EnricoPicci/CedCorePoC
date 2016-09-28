@@ -6,27 +6,32 @@ import {ValidationResponse} from '../model/validation-response';
 
 @Injectable()
 export class SessionService {
-  public customerId: string;
+  private ndg: string;
   private customer: Customer;
   public validationResponse: ValidationResponse;
 
   constructor() { }
 
-  // Observable customerId source
-  private _customerId = new Subject<string>();
+  // Observable setNdg source
+  private _ndg = new Subject<string>();
   // Observable string streams
-  _customerId$ = this._customerId.asObservable();
-  // event raised when customerId changes
-  newCustomerId(id: string) {
-      this._customerId.next(id);
-  }
+  public ndg$ = this._ndg.asObservable();
 
+
+  setNdg(ndg: string) {
+    console.log('ndg  ', ndg);
+    this.ndg = ndg;
+    this._ndg.next(ndg);
+  }
+  getNdg() {
+    return this.ndg;
+  }
   setCustomer(customer: Customer) {
     this.customer = customer;
     if (customer) {
-      this.customerId = customer.customerId;
+      this.setNdg(customer.ndg);
     } else {
-      this.customerId = null;
+      this.setNdg(null);
     }
   }
   getCustomer() {

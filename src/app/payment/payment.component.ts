@@ -1,4 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+import { Subscription }    from 'rxjs/Subscription';
 
 import {SessionService} from '../shared/session.service';
 
@@ -16,6 +17,7 @@ export class PaymentComponent implements OnInit {
     {id: 'sepa', label: 'SEPA', path: 'sepa'},
     {id: 'mav', label: 'MAV', path: 'mav'}
   ];
+  private ndgSubscription: Subscription;
 
   constructor(
     private session: SessionService,
@@ -23,8 +25,9 @@ export class PaymentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.session.customerId) {
-      this.server.adv(this.session.customerId)
+    this.ndgSubscription = this.session.ndg$.subscribe(() => {
+      console.log('ids  ');
+      this.server.adv(this.session.getNdg())
         .subscribe(
           (result: ValidationResponse) => {
             this.session.validationResponse = result;
@@ -32,7 +35,12 @@ export class PaymentComponent implements OnInit {
           },
           (error) => {console.log(error)}
         )
-    }
+    })
+  }
+  // it is critical to unsubscribe subscriptions when a Component is destroyed to avoid memory leaks
+  // subscriptions not unsubscribed remain active when a Component is destroyed unless explicitely destroyed
+  ngOnDestroy() {
+    this.ndgSubscription.unsubscribe();
   }
 
   validationException() {

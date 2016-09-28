@@ -1,3 +1,5 @@
+<div class="a2component "><div class="a2componentname">App component</div>
+
 <md-sidenav-layout>
 
   <md-sidenav #sidenav mode="side" class="app-sidenav">
@@ -10,17 +12,20 @@
       <i class="material-icons app-toolbar-menu">menu</i>
     </button>
 
-    Cedacri PoC Core Banking
+    PoC Core Banking
 
     <span class="app-toolbar-filler"></span>
     <button md-button (click)="payment()">Pagamenti</button>
     <button md-button (click)="adv()">ADV</button>
+    <img src="./assets/images/cedacri.jpeg" style="width: 100px"/>
+    <span style="font-size:50%; margin-left: 10px; margin-right: 10px">powered by</span>
+    <a href="http://angular.io"><img src="./assets/images/angular2.jpeg" style="width: 50px; cursor: pointer"/></a>
   </md-toolbar>
 
   <div class="app-content">
     <router-outlet></router-outlet>
   </div>
 
-
-
 </md-sidenav-layout>
+
+</div>

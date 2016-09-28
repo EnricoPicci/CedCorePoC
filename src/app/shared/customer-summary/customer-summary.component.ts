@@ -22,11 +22,11 @@ export class CustomerSummaryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let goToRemoteServer = (this.session.customerId != null && this.session.getCustomer() == null) ||
+    let goToRemoteServer = (this.session.getNdg() != null && this.session.getCustomer() == null) ||
                             (this.session.getCustomer() != null && 
-                                this.session.getCustomer().customerId != this.session.customerId);
+                                this.session.getCustomer().customerId != this.session.getNdg());
     if (goToRemoteServer) {
-      this.getCustomerFromRemoteServer(this.session.customerId);
+      this.getCustomerFromRemoteServer(this.session.getNdg());
     } else {
       if (this.session.getCustomer()) {
         this.setCustomerForView(this.session.getCustomer());
@@ -53,8 +53,8 @@ export class CustomerSummaryComponent implements OnInit {
     this.customer = this.session.getCustomer();
   }
 
-  getCustomerFromRemoteServer(id?: string, cognome?: string) {
-    this.server.getCustomer(id, cognome)
+  getCustomerFromRemoteServer(ndg?: string, cognome?: string) {
+    this.server.getCustomer(ndg, cognome)
       .subscribe(
         (result: Customer) => {
           this.setCustomerForView(result);

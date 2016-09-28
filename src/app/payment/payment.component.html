@@ -1,6 +1,7 @@
-
-<app-functional-area-menu [tabs]="tabs"></app-functional-area-menu>
-<app-customer-summary></app-customer-summary>
-<router-outlet></router-outlet>
-<app-payment-validation-exception *ngIf="validationException()" 
-    [validationResponse]="this.session.validationResponse"></app-payment-validation-exception>
+<div class="a2component "><div class="a2componentname">Payment component</div>
+    <app-functional-area-menu [tabs]="tabs"></app-functional-area-menu>
+    <app-customer-summary></app-customer-summary>
+    <router-outlet></router-outlet>
+    <app-payment-validation-exception *ngIf="validationException()" 
+        [validationResponse]="this.session.validationResponse"></app-payment-validation-exception>
+</div>

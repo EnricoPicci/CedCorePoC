@@ -27,9 +27,9 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
                     .catch(this.handleError);
     }
 
-    adv(customerId: string) {
+    adv(ndg: string) {
         let url = this.configuration.baseServicesUrl + 'adv';
-        let jsonParam = {customerId: customerId};
+        let jsonParam = {ndg: ndg};
         return this.http.post(url, jsonParam, this.getOptions())
                     .map(this.extractData)
                     .map((json) => {

@@ -1,27 +1,29 @@
-<md-card class="app-input-section">
-  
-  <md-input placeholder="Nome" [disabled]="true" [value]="customer?.nome"></md-input>
+<div class="a2component "><div class="a2componentname">Customer-summary component</div>
+  <md-card class="app-input-section">
+    
+    <md-input placeholder="Nome" [disabled]="true" [value]="customer?.nome"></md-input>
 
-  <md-input *ngIf="customer" placeholder="Cognome" [disabled]="!searchMode" 
-    [(ngModel)]="customer.cognome" (keyup.enter)="search()"></md-input>
+    <md-input *ngIf="customer" placeholder="Cognome" [disabled]="!searchMode" 
+      [(ngModel)]="customer.cognome" (keyup.enter)="search()"></md-input>
 
-  <md-input maxlength="16" placeholder="NDG" [disabled]="true" [value]="customer?.ndg"></md-input>
+    <md-input maxlength="16" placeholder="NDG" [disabled]="true" [value]="customer?.ndg"></md-input>
 
-  <a (click)="search()">
-    <img border="0" md-tooltip="Ricerca cliente" tooltip-position="below" 
-      src="./assets/images/search.png" width="30" height="30">
-  </a>
-  <a *ngIf="searchMode && session.customer" (click)="disableSearchMode()">
-    <img border="0" 
-      src="./assets/images/back.png" width="30" height="30">
-  </a>
+    <a (click)="search()">
+      <img border="0" md-tooltip="Ricerca cliente" tooltip-position="below" 
+        src="./assets/images/search.png" width="30" height="30">
+    </a>
+    <a *ngIf="searchMode && session.customer" (click)="disableSearchMode()">
+      <img border="0" 
+        src="./assets/images/back.png" width="30" height="30">
+    </a>
 
-  <div *ngIf="!searchMode && customer" >
-    <div>Rapporti</div>
-    <select [(ngModel)]="rapportoId">
-      <option  *ngFor="let rapporto of customer.rapporti"
-          [value]="rapporto.id">{{rapporto.id}}</option> 
-    </select>
-  </div>
+    <div *ngIf="!searchMode && customer" >
+      <div>Rapporti</div>
+      <select [(ngModel)]="rapportoId">
+        <option  *ngFor="let rapporto of customer.rapporti"
+            [value]="rapporto.id">{{rapporto.id}}</option> 
+      </select>
+    </div>
 
-</md-card>
+  </md-card>
+</div>

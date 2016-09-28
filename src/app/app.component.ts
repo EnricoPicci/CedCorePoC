@@ -19,9 +19,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     let subscription = this.route.queryParams.subscribe((params) => {
       console.log('run the subscription one time');
-      if (params['id']) {
-        this.session.customerId = params['id'];
+      if (params['NDG']) {
+        this.session.setNdg(params['NDG']);
         console.log('you should not run the subscription any more');
+        // once the NDG is ready for the first time (i.e when the app is launched) the subscription
+        // must be unsubscribed to avoid reading it again if you get back to the initial 'page'
+        // (e.g. via browser back button)
         subscription.unsubscribe();
       }
     });
