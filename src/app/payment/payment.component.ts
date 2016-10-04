@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Subscription }    from 'rxjs/Subscription';
 
-import {SessionService} from '../shared/session.service';
+import {SessionService} from '../shared/session/session.service';
 
 import {RemoteServicesInterface} from '../remote-services-interface/remote-services.interface';
 import {REMOTE_SERVICE_INTERFACE} from '../remote-services-interface/remote-services.token';
@@ -25,21 +25,24 @@ export class PaymentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.ndgSubscription = this.session.ndg$.subscribe(() => {
-      console.log('ids  ');
-      this.server.adv(this.session.getNdg())
-        .subscribe(
-          (result: ValidationResponse) => {
-            this.session.validationResponse = result;
-            console.log(this.session.validationResponse);
-          },
-          (error) => {console.log(error)}
-        )
+    this.ndgSubscription = this.session.ndg$.subscribe((ndg) => {
+      console.log('ids  ', ndg);
+      if (ndg) {
+        this.server.adv(ndg)
+          .subscribe(
+            (result: ValidationResponse) => {
+              this.session.validationResponse = result;
+              console.log(this.session.validationResponse);
+            },
+            (error) => {console.log(error)}
+          )
+      }
     })
   }
   // it is critical to unsubscribe subscriptions when a Component is destroyed to avoid memory leaks
   // subscriptions not unsubscribed remain active when a Component is destroyed unless explicitely destroyed
   ngOnDestroy() {
+    console.log('ids ddd ');
     this.ndgSubscription.unsubscribe();
   }
 

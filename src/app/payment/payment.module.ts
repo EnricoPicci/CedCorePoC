@@ -18,7 +18,7 @@ import { PaymentValidationExceptionComponent } from './payment-validation-except
     PaymentValidationExceptionComponent
   ],
   imports: [
-    CommonModule, 
+    CommonModule,
     paymentRouting,
     SharedModule
   ],

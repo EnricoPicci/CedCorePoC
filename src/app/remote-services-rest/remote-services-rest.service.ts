@@ -6,19 +6,18 @@ import './rxjs-operators';
 import {RemoteServicesInterface} from '../remote-services-interface/remote-services.interface';
 import {Customer} from '../model/customer';
 import {ValidationResponse} from '../model/validation-response';
-import {ConfigurationService} from '../shared/configuration.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class RemoteServicesRestService implements RemoteServicesInterface {
 
     constructor(
-        private http: Http,
-        private configuration: ConfigurationService
+        private http: Http
     ) { }
 
-    getCustomer(id?: string, cognome?: string) {
-        let url = this.configuration.baseServicesUrl + 'customer';
-        let jsonParam = {id: id, cognome: cognome};
+    getCustomer(ndg?: string, cognome?: string) {
+        let url = environment.baseServicesUrl + 'customer';
+        let jsonParam = {ndg: ndg, cognome: cognome};
         return this.http.post(url, jsonParam, this.getOptions())
                     .map(this.extractData)
                     .map((json) => {
@@ -28,7 +27,7 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
     }
 
     adv(ndg: string) {
-        let url = this.configuration.baseServicesUrl + 'adv';
+        let url = environment.baseServicesUrl + 'adv';
         let jsonParam = {ndg: ndg};
         return this.http.post(url, jsonParam, this.getOptions())
                     .map(this.extractData)

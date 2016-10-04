@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import {SessionService} from '../shared/session/session.service';
+
 @Component({
   selector: 'app-adv',
   templateUrl: './adv.component.html',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvComponent implements OnInit {
 
-  constructor() { }
+  constructor(private session: SessionService) { }
 
   ngOnInit() {
+  }
+
+  documentsUpdated() {
+    this.session.updateNdg();
   }
 
 }

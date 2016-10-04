@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {SessionService} from '../../shared/session.service';
+import {SessionService} from '../../shared/session/session.service';
 
 @Component({
   selector: 'app-sepa-payment',
@@ -8,7 +8,6 @@ import {SessionService} from '../../shared/session.service';
   styleUrls: ['./sepa-payment.component.css']
 })
 export class SepaPaymentComponent implements OnInit {
-  iban: string;
 
   constructor(private session: SessionService) { }
 
@@ -17,6 +16,13 @@ export class SepaPaymentComponent implements OnInit {
 
   submitPayment() {
     console.log('Payment submitted');
+  }
+  error() {
+    // generate an error to test the Error Handler
+    let nullString: string;
+    // the nullString is null and therefore looking for the 11th char generates an error
+    let noChar = nullString[10];
+    console.log(noChar);
   }
 
 }

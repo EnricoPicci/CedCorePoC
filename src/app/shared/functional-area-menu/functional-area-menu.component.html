@@ -1,4 +1,4 @@
-<div class="a2component "><div class="a2componentname">Functional-area-menu component</div>
+<div [comp-highlight]="'darkgoldenrod'"><div class="a2componentname" [comp-highlight-title]>Functional-area-menu component</div>
   <md-card>
     <md-tab-group (selectChange)="onTabClick($event)" [selectedIndex]="selectedTabIndex">
       <md-tab *ngFor="let tab of tabs">

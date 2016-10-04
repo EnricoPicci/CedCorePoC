@@ -1,9 +1,10 @@
-<div class="a2component "><div class="a2componentname">App component</div>
+<div [comp-highlight]="'red'"><div class="a2componentname" [comp-highlight-title]>App component</div>
+
 
 <md-sidenav-layout>
 
   <md-sidenav #sidenav mode="side" class="app-sidenav">
-      Logout
+      <comp-highlight-switch></comp-highlight-switch>
   </md-sidenav>
 
 

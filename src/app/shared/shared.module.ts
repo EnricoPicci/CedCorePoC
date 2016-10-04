@@ -6,14 +6,17 @@ import {MdTabsModule} from '@angular2-material/tabs/tabs';
 import {MdCardModule} from '@angular2-material/card/card';
 import {MdInputModule} from '@angular2-material/input/input';
 import {MdTooltipModule} from '@angular2-material/tooltip/tooltip';
+import {MdCheckboxModule} from '@angular2-material/checkbox/checkbox';
+
+import {SessionService} from './session/session.service';
 
 import { FunctionalAreaMenuComponent } from './functional-area-menu/functional-area-menu.component';
 import { CustomerSummaryComponent } from './customer-summary/customer-summary.component';
 
-import {SessionService} from './session.service';
-import {ConfigurationService} from './configuration.service';
 import { IbanPipe } from './iban/iban.pipe';
 import { IbanComponent } from './iban/iban.component';
+
+import {CompUtilsModule} from '../comp-utils/comp-utils.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { IbanComponent } from './iban/iban.component';
     MdTabsModule.forRoot(),
     MdCardModule.forRoot(),
     MdInputModule.forRoot(),
-    MdTooltipModule.forRoot()
+    MdTooltipModule.forRoot(),
+    MdCheckboxModule.forRoot(),
+    CompUtilsModule
   ],
   exports: [
     FunctionalAreaMenuComponent,
@@ -38,8 +43,10 @@ import { IbanComponent } from './iban/iban.component';
     MdTabsModule,
     MdCardModule,
     MdInputModule,
-    MdTooltipModule
+    MdTooltipModule,
+    MdCheckboxModule,
+    CompUtilsModule
   ],
-  providers: [SessionService, ConfigurationService]
+  providers: [SessionService]
 })
 export class SharedModule { }

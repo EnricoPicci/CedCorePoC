@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import {PocWelcomeComponent} from './poc-welcome/poc-welcome.component';
 import {PaymentComponent} from './payment/payment.component';
 import {AdvComponent} from './adv/adv.component';
-import {ErrorManagerComponent} from './error-manager/error-manager.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [

@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 /*
 npm install --save @angular2-material/core @angular2-material/sidenav @angular2-material/toolbar 
 npm install --save @angular2-material/card @angular2-material/button @angular2-material/input @angular2-material/tabs
-npm install --save @angular2-material/icon
+npm install --save @angular2-material/icon @angular2-material/checkbox
 npm install hammerjs --save
 typings install dt~hammerjs --save --global
 */
@@ -23,19 +23,19 @@ import {RtlModule} from '@angular2-material/core/rtl/dir';
 import { AppComponent } from './app.component';
 import { routing,
          appRoutingProviders }  from './app.routing';
-import { PaymentModule } from './payment/payment.module';
-import {SharedModule} from './shared/shared.module';
-import {AdvModule} from './adv/adv.module'
-import { ErrorManagerComponent } from './error-manager/error-manager.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PocWelcomeComponent } from './poc-welcome/poc-welcome.component';
 
+import { PaymentModule } from './payment/payment.module';
+import {SharedModule} from './shared/shared.module';
+import {AdvModule} from './adv/adv.module'
 import {RemoteServicesRestModule} from './remote-services-rest/remote-services-rest.module';
+import {ErrorManagerModule} from './error-manager/error-manager.module';
+import {CompUtilsModule} from './comp-utils/comp-utils.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorManagerComponent,
     PageNotFoundComponent,
     PocWelcomeComponent
   ],
@@ -44,9 +44,6 @@ import {RemoteServicesRestModule} from './remote-services-rest/remote-services-r
     FormsModule,
     HttpModule,
     routing,
-    PaymentModule,
-    AdvModule,
-    SharedModule,
     MdSidenavModule.forRoot(),
     MdToolbarModule.forRoot(),
     //MdTabsModule.forRoot(),
@@ -56,8 +53,12 @@ import {RemoteServicesRestModule} from './remote-services-rest/remote-services-r
     OverlayModule.forRoot(),
     PortalModule.forRoot(),
     RtlModule.forRoot(),
-
-    RemoteServicesRestModule
+    PaymentModule,
+    AdvModule,
+    SharedModule,
+    RemoteServicesRestModule,
+    ErrorManagerModule,
+    CompUtilsModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

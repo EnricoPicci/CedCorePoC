@@ -8,12 +8,6 @@
   width: 100%;
 }
 
-.a2component {
-  border-width: thick;
-  border-style: solid;
-  /*border-style: none;*/
-  border-color: red;
-}
 .a2componentname {
   color: darkred;
   font-size: large;
