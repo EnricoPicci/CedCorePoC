@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { MavPaymentComponent } from './mav-payment.component';
+import { DDPaymentComponent } from './dd-payment.component';
 
-describe('Component: MavPayment', () => {
+describe('Component: DDPayment', () => {
   it('should create an instance', () => {
-    let component = new MavPaymentComponent();
+    let component = new DDPaymentComponent();
     expect(component).toBeTruthy();
   });
 });

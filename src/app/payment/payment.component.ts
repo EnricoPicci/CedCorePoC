@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { Subscription }    from 'rxjs/Subscription';
 
-import {SessionService} from '../shared/session/session.service';
+import {SessionService} from '../app-shared/session/session.service';
 
-import {RemoteServicesInterface} from '../remote-services-interface/remote-services.interface';
-import {REMOTE_SERVICE_INTERFACE} from '../remote-services-interface/remote-services.token';
-import {ValidationResponse} from '../model/validation-response';
+import {RemoteServicesInterface} from '../app-shared/remote-services-interface/remote-services.interface';
+import {REMOTE_SERVICE_INTERFACE} from '../app-shared/remote-services-interface/remote-services.token';
+import {ValidationResponse} from '../app-shared/remote-services-interface/validation-response';
 
 @Component({
   selector: 'app-payment',
@@ -15,7 +15,7 @@ import {ValidationResponse} from '../model/validation-response';
 export class PaymentComponent implements OnInit {
   tabs = [
     {id: 'sepa', label: 'SEPA', path: 'sepa'},
-    {id: 'mav', label: 'MAV', path: 'mav'}
+    {id: 'dd', label: 'DD', path: 'dd'}
   ];
   private ndgSubscription: Subscription;
 

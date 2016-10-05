@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {SessionService} from '../../shared/session/session.service';
+import {SessionService} from '../../app-shared/session/session.service';
 
 @Component({
   selector: 'app-sepa-payment',

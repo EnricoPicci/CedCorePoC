@@ -5,8 +5,8 @@ import { PaymentComponent } from './payment.component';
 import { paymentRouting }  from './payment.routing';
 import { PaymentHomeComponent } from './payment-home/payment-home.component';
 import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
-import { MavPaymentComponent } from './mav-payment/mav-payment.component';
-import {SharedModule} from '../shared/shared.module';
+import { DDPaymentComponent } from './dd-payment/dd-payment.component';
+import {AppSharedModule} from '../app-shared/app-shared.module';
 import { PaymentValidationExceptionComponent } from './payment-validation-exception/payment-validation-exception.component';
 
 @NgModule({
@@ -14,13 +14,13 @@ import { PaymentValidationExceptionComponent } from './payment-validation-except
     PaymentComponent,
     PaymentHomeComponent,
     SepaPaymentComponent,
-    MavPaymentComponent,
+    DDPaymentComponent,
     PaymentValidationExceptionComponent
   ],
   imports: [
     CommonModule,
     paymentRouting,
-    SharedModule
+    AppSharedModule  // imported in the standard way as opposed to how it is imported by AppModule
   ],
   providers: []
 })

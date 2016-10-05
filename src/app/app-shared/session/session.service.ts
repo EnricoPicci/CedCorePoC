@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject }    from 'rxjs/BehaviorSubject';
 
-import {Customer} from '../../model/customer';
-import {ValidationResponse} from '../../model/validation-response';
+import {Customer} from '../remote-services-interface/customer';
+import {ValidationResponse} from '../remote-services-interface/validation-response';
 
 @Injectable()
 export class SessionService {
   public ndg: string;
-  private customer: Customer;
+  private customers: Array<Customer>;
   public validationResponse: ValidationResponse;
 
   constructor() { }
@@ -21,7 +21,7 @@ export class SessionService {
   setNdg(ndg: string) {
     console.log('ndg  ', ndg);
     if (this.ndg && this.ndg !== ndg) {
-      this.customer = null;
+      this.customers = null;
     }
     this.ndg = ndg;
     this._ndg.next(ndg);
@@ -35,16 +35,16 @@ export class SessionService {
   getNdg() {
     return this.ndg;
   }
-  setCustomer(customer: Customer) {
-    this.customer = customer;
-    if (customer) {
-      this.setNdg(customer.ndg);
+  setCustomers(customers: Array<Customer>) {
+    this.customers = customers;
+    if (customers) {
+      this.setNdg(customers[0].ndg);
     } else {
       this.setNdg(null);
     }
   }
-  getCustomer() {
-    return this.customer;
+  getCustomers() {
+    return this.customers;
   }
 
 }

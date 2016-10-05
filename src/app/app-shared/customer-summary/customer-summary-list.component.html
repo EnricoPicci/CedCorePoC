@@ -1,0 +1,5 @@
+<div [comp-highlight]="'green'"><div class="a2componentname" [comp-highlight-title]>Customer-list component</div>
+  <div *ngFor="let customer of customers">
+    <app-customer-summary [customer]="customer"></app-customer-summary>
+  </div>
+</div>

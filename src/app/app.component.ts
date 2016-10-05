@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import {SessionService} from './shared/session/session.service';
+import {SessionService} from './app-shared/session/session.service';
 
 @Component({
   selector: 'app-root',

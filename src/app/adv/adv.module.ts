@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AdvComponent } from './adv.component';
 import { DocumentComponent } from './document.component';
 
-import {SharedModule} from '../shared/shared.module';
+import {AppSharedModule} from '../app-shared/app-shared.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,7 @@ import {SharedModule} from '../shared/shared.module';
     DocumentComponent
   ],
   imports: [
-    SharedModule
+    AppSharedModule
   ],
   providers: []
 })
