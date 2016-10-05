@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {ValidationResponse} from '../../model/validation-response'
+import {ValidationResponse} from '../../app-shared/remote-services-interface/validation-response'
 
 @Component({
   selector: 'app-payment-validation-exception',

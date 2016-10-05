@@ -8,7 +8,7 @@ import {DDPaymentComponent} from './dd-payment/dd-payment.component';
 
 const appRoutes: Routes = [
     { 
-        path: 'payment', component: PaymentComponent,
+        path: '', component: PaymentComponent,
         children: [
             { path: '', component: PaymentHomeComponent },
             { path: 'sepa', component: SepaPaymentComponent },
