@@ -21,9 +21,9 @@ export class CompHighlightSwitchComponent implements OnInit {
   }
 
   buttonText() {
-    let text = 'CompHighlightOff';
+    let text = 'CompHighlightOn';
     if (this.switchService.isOn()) {
-      text = 'CompHighlightOn';
+      text = 'CompHighlightOff';
     }
     return text;
   }

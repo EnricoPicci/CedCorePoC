@@ -27,12 +27,11 @@ import {SessionService} from './session/session.service';
 
 import { FunctionalAreaMenuComponent } from './functional-area-menu/functional-area-menu.component';
 import { CustomerSummaryComponent } from './customer-summary/customer-summary.component';
-
+import { CustomerSummaryListComponent } from './customer-summary/customer-summary-list.component';
 import { IbanPipe } from './iban/iban.pipe';
 import { IbanComponent } from './iban/iban.component';
 
 import {CompUtilsModule} from '../../org-shared/comp-utils/comp-utils.module';
-import { CustomerSummaryListComponent } from './customer-summary/customer-summary-list.component';
 
 @NgModule({
   declarations: [

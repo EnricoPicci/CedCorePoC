@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-//import { FormsModule } from '@angular/forms';
-//import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { routing,
@@ -25,14 +23,21 @@ import {RemoteServicesRestModule} from './app-shared/remote-services-rest/remote
   imports: [
     BrowserModule,
     routing,  // the main routing configuration is loaded by the root module (i.e. this module)
-    //PaymentModule,
     AdvModule,
     AppSharedModule.forRoot(),  // imported using forRoot() to ensure that the services configured by this
                                 // this module for Dependency Injection are really Singletons also
                                 // for modules which are lazy loaded (see AppSharedModule)
     RemoteServicesRestModule,
     ErrorManagerModule,
-    CompUtilsModule
+    CompUtilsModule.forRoot()  // imported using forRoot() for the same reason as above
+                                // It is critical that forRoott() is called only in theAppModule
+                                // to make sure that PaymentModule (which is lazy loaded)
+                                // uses the same services provided by DI at the root app level.
+                                // If CompUtilsModule.forRoot() is called in the AppSharedModule import
+                                // declaration (rather than in the AppModule as here), 
+                                // then 2 instances of the services provided by CompUtilsModule
+                                // are created: one when AppSharedModule is loaded by the AppModule
+                                // and the second when AppSharedModule is loaded by PaymentModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
