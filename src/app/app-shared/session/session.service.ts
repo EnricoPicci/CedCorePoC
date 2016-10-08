@@ -1,29 +1,37 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject }    from 'rxjs/BehaviorSubject';
 
+import {TabList} from '../../app-shared/functional-area-menu/tab-list';
 import {Customer} from '../remote-services-interface/customer';
 import {ValidationResponse} from '../remote-services-interface/validation-response';
 
 @Injectable()
 export class SessionService {
+  // SessionService publishes the event of change of NDG and notiefies the
+  // subscribers when NDG changes 
   public ndg: string;
+  private _ndg = new BehaviorSubject<string>(null);  // The fist value emitted by the Observable is null
+  public ndg$ = this._ndg.asObservable();  // the trailing $ is a convention for observable
+  // SessionService is used to notify FunctionalAreaMenuComponent that new tabs have to be loaded
+  // Use the updateTabs() method to fire the notification event
+  private _tabs = new BehaviorSubject<TabList>(null);
+  public tabs$ = this._tabs.asObservable();
+
   private customers: Array<Customer>;
   public validationResponse: ValidationResponse;
-  private _ndg = new BehaviorSubject<string>(null);  // Observable setNdg source
-  public ndg$ = this._ndg.asObservable();  // Observable string streams
 
   constructor() { }
 
   // updateNdg is used if a Component wants to signal that something may have happened to the customer
   // the subscribers to the ndg$ observable can react accordingly
   // used by ADV to signal to Payment that something has changed so that Payment can run again the checks
-  updateNdg() {
+  public updateNdg() {
     this._ndg.next(this.ndg);
   }
-  getNdg() {
+  public getNdg() {
     return this.ndg;
   }
-  setCustomers(customers: Array<Customer>) {
+  public setCustomers(customers: Array<Customer>) {
     this.customers = customers;
     if (customers) {
       this.setNdg(customers[0].ndg);
@@ -31,7 +39,7 @@ export class SessionService {
       this.setNdg(null);
     }
   }
-  getCustomers() {
+  public getCustomers() {
     return this.customers;
   }
   private setNdg(ndg: string) {
@@ -41,5 +49,10 @@ export class SessionService {
     }
     this.ndg = ndg;
     this._ndg.next(ndg);
+  }
+
+  // use updateTabs() to fire the notification that tabs have changed
+  public updateTabs(tabs: TabList) {
+    this._tabs.next(tabs);
   }
 }

@@ -2,16 +2,18 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Route } from '@angular/router';
 
 import {SessionService} from './app-shared/session/session.service';
+import {Tab} from './app-shared/functional-area-menu/tab';
 import {RemoteServicesInterface} from './app-shared/remote-services-interface/remote-services.interface';
 import {REMOTE_SERVICE_INTERFACE} from './app-shared/remote-services-interface/remote-services.token';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   moduleRoutes: Route[];
+  tabs: Array<Tab>;
 
   constructor(
     private router: Router,
