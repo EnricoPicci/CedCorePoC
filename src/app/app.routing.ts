@@ -16,8 +16,12 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 // http://blog.angular-university.io/angular2-ngmodule/
 const appRoutes: Routes = [
     { path: '', component: PocWelcomeComponent },
-    { path: 'payment', loadChildren: 'app/payment/payment.module' },
     { path: 'adv', component: AdvComponent },
+    { path: 'payment', loadChildren: 'app/payment/payment.module' },
+    { path: 'dynamic1', loadChildren: 'dynamic-route-1/dynamic-route-1.module' },
+    // using #DynamicRoute2Module at the end allows us to avoid the use of the 'default' keyword
+    // in the definition of DynamicRoute2Module
+    { path: 'dynamic2', loadChildren: 'dynamic-route-2/dynamic-route-2.module#DynamicRoute2Module' },
     { path: '**', component: PageNotFoundComponent }
 ];
 

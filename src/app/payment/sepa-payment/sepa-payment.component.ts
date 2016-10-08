@@ -17,12 +17,5 @@ export class SepaPaymentComponent implements OnInit {
   submitPayment() {
     console.log('Payment submitted');
   }
-  error() {
-    // generate an error to test the Error Handler
-    let nullString: string;
-    // the nullString is null and therefore looking for the 11th char generates an error
-    let noChar = nullString[10];
-    console.log(noChar);
-  }
 
 }

@@ -3,8 +3,18 @@
 
 <md-sidenav-layout>
 
-  <md-sidenav #sidenav mode="side" class="app-sidenav">
-      <comp-highlight-switch></comp-highlight-switch>
+  <md-sidenav #sidenav mode="side" class="app-sidenav" (mouseleave)="sidenav.toggle()">
+      <ul>
+        <li>
+          <comp-highlight-switch></comp-highlight-switch>
+        </li>
+        <li>
+          <button (click)="error()" style="background-color: red">Errore</button>
+        </li>
+        <li *ngFor="let route of moduleRoutes">
+          <button md-button (click)="goToRoute(route)">{{route.path}}</button>
+        </li>
+      </ul>
   </md-sidenav>
 
 

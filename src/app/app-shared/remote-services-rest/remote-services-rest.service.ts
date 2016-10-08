@@ -41,6 +41,13 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
                     .catch(this.handleError);
     }
 
+    getModules() {
+        let url = environment.baseServicesUrl + 'modules';
+        return this.http.get(url, this.getOptions())
+                    .map(this.extractData)
+                    .catch(this.handleError);
+    }
+
     private getOptions() {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -48,7 +55,7 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
     }
     private extractData(res: Response) {
         let body = res.json();
-        return body || [];
+        return body || {};
     }
     private handleError (error: any) {
         let errMsg = (error.message) ? error.message :
