@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, Route } from '@angular/router';
 
 import {SessionService} from './app-shared/session/session.service';
@@ -24,10 +24,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     let subscription = this.route.queryParams.subscribe((params) => {
-      console.log('run the subscription one time');
+      console.log('AppComponent subscribes to route.queryParams observable to retrieve the query string');
       if (params['NDG']) {
         this.session.ndg = params['NDG'];
-        console.log('you should not run the subscription any more');
+        console.log('AppComponent unsubscribes from route.queryParams');
         // once the NDG is ready for the first time (i.e when the app is launched) the subscription
         // must be unsubscribed to avoid reading it again if you get back to the initial 'page'
         // (e.g. via browser back button)
@@ -36,8 +36,18 @@ export class AppComponent implements OnInit {
     });
 
     this.server.getModules().subscribe((moduleRoutes) => {
-      //this.router.resetConfig([...moduleRoutes, ...this.router.config]);
       this.moduleRoutes = moduleRoutes;
+    })
+  }
+
+  // before leaving the app a context object is written on a remote DB
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHander(event) {
+    // not very useful to log in beforeUnloadHander, but still ...
+    console.log('AppComponent beforeUnloadHander');
+    let context = {ndg: this.session.getNdg()};
+    this.server.saveContext(context).subscribe(() => {
+      console.log('AppComponent context saved ', context);
     })
   }
 

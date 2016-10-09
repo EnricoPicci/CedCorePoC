@@ -47,6 +47,13 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
                     .map(this.extractData)
                     .catch(this.handleError);
     }
+    saveContext(context: any) {
+        let url = environment.baseServicesUrl + 'context';
+        //let jsonParam = JSON.stringify(context);
+        return this.http.post(url, context, this.getOptions())
+                    .map(this.extractData)
+                    .catch(this.handleError);
+    }
 
     private getOptions() {
         let headers = new Headers({ 'Content-Type': 'application/json' });

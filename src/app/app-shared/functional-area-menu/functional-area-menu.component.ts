@@ -27,6 +27,8 @@ export class FunctionalAreaMenuComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    // FunctionalAreaMenuComponent subscribes to the observable tabs$ so that it gets notified
+    // when the tabs that it shows need to be changed
     this.session.tabs$.subscribe((tabList: TabList) => {
       if (tabList) {
         this.tabs = tabList.tabs;
@@ -46,9 +48,16 @@ export class FunctionalAreaMenuComponent implements OnInit, OnDestroy {
   }
 
   onTabClick(event: MdTabChangeEvent) {
-    console.log('Path requested ', this.path + '/' + this.tabs[event.index].path);
-    //this.router.navigate([this.tabs[event.index].path], { relativeTo: this.route });
-    this.router.navigate([this.path + '/' + this.tabs[event.index].path]);
+    // the path to use to navigate where it is requested is built composing different information
+    // this.path contains the 'parentPath' passed to this FunctionalAreaMenuComponent by the component
+    // which asks to create the tabs (FunctionalAreaMenuComponent does not know which component is going
+    // to request its services)
+    // the actual tab clicked is identified using the index property of the event; based on the index
+    // we can retrieve the second part of the path from the information passed to FunctionalAreaMenuComponent
+    // by the component requesting its services
+    let pathRequested = this.path + '/' + this.tabs[event.index].path;
+    console.log('Path requested ', pathRequested);
+    this.router.navigate([pathRequested]);
   }
 
 }
