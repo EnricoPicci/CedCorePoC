@@ -21,6 +21,8 @@ export class PaymentComponent implements OnInit {
   ];
   private ndgSubscription: Subscription;
 
+  private serviceInError: string;
+
   constructor(
     private router: Router, 
     private route: ActivatedRoute,
@@ -41,7 +43,11 @@ export class PaymentComponent implements OnInit {
               this.session.validationResponse = result;
               console.log('Validation service response: ', this.session.validationResponse);
             },
-            (error) => {console.log(error)}
+            (error) => {
+              this.serviceInError = 'ADV';
+              console.log('Error in ADV call');
+              this.server.logServiceError(error, this.serviceInError);
+            }
           )
       }
     });

@@ -90,7 +90,7 @@ export class CustomerSummaryComponent implements OnInit {
             this.setCustomerForView(result[0]);
           }
           this.customersRetrieved.next();
-          this.session.setCustomers(result);
+          this.session.setCustomers(result, ndg);
 
         },
         (error) => {console.log(error)}

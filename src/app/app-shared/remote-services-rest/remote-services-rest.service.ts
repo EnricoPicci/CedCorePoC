@@ -31,7 +31,7 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
     }
 
     adv(ndg: string) {
-        let url = environment.baseServicesUrl + 'adv';
+        let url = environment.baseServicesAdvUrl + 'adv';
         let jsonParam = {ndg: ndg};
         return this.http.post(url, jsonParam, this.getOptions())
                     .map(this.extractData)
@@ -49,10 +49,22 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
     }
     saveContext(context: any) {
         let url = environment.baseServicesUrl + 'context';
-        //let jsonParam = JSON.stringify(context);
         return this.http.post(url, context, this.getOptions())
                     .map(this.extractData)
                     .catch(this.handleError);
+    }
+    logServiceError(errorMessage: any, serviceName: string) {
+        let errorJson = {
+            type: 'SERVICE ERROR',
+            service: serviceName,
+            message: errorMessage,
+            timestamp: Date.now()
+        }
+        let url = environment.loggerUrl + 'log';
+        console.log('logServiceError ', errorJson);
+        this.http.post(url, errorJson, this.getOptions())
+                    .map(this.extractData)
+                    .subscribe((respData) => {console.log('Log service response ', respData)})
     }
 
     private getOptions() {
@@ -67,7 +79,7 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
     private handleError (error: any) {
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error ';
-        console.error(errMsg); 
+        console.error('handleError', errMsg); 
         return Observable.throw(errMsg);
     }
 }

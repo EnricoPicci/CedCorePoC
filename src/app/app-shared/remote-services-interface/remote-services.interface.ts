@@ -8,4 +8,5 @@ export interface RemoteServicesInterface {
   adv(customerId: string): Observable<ValidationResponse>;
   getModules(): Observable<Array<any>>;
   saveContext(context: any): Observable<any>;
+  logServiceError(error: any, serviceName: string): void;
 }

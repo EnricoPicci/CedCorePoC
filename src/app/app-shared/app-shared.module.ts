@@ -13,7 +13,7 @@ typings install dt~hammerjs --save --global
 */
 import {MdSidenavModule} from '@angular2-material/sidenav/sidenav';
 import {MdToolbarModule} from '@angular2-material/toolbar/toolbar';
-import {MdButtonModule} from '@angular2-material/button/button';
+import {MdButtonModule} from '@angular2-material/button';
 import {PortalModule} from '@angular2-material/core/portal/portal-directives';
 import {OverlayModule} from '@angular2-material/core/overlay/overlay-directives';
 import {RtlModule} from '@angular2-material/core/rtl/dir';
@@ -32,6 +32,7 @@ import { IbanPipe } from './iban/iban.pipe';
 import { IbanComponent } from './iban/iban.component';
 
 import {CompUtilsModule} from '../../org-shared/comp-utils/comp-utils.module';
+import {ErrorManagerModule} from '../../org-shared/error-manager/error-manager.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {CompUtilsModule} from '../../org-shared/comp-utils/comp-utils.module';
     MdInputModule.forRoot(),
     MdTooltipModule.forRoot(),
     MdCheckboxModule.forRoot(),
-    CompUtilsModule
+    CompUtilsModule,
+    ErrorManagerModule
   ],
   exports: [
     FunctionalAreaMenuComponent,
@@ -72,7 +74,8 @@ import {CompUtilsModule} from '../../org-shared/comp-utils/comp-utils.module';
     MdInputModule,
     MdTooltipModule,
     MdCheckboxModule,
-    CompUtilsModule
+    CompUtilsModule,
+    ErrorManagerModule
   ], 
   // This module can be shared also by Modules which are lazy-loaded
   // We want though to have only one instance of SessionService in the whole app (a Singleton)

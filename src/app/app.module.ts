@@ -8,7 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PocWelcomeComponent } from './poc-welcome/poc-welcome.component';
 
 import {AppSharedModule} from './app-shared/app-shared.module';
-import {AdvModule} from './adv/adv.module'
+import {AdvModule} from './adv/adv.module';
 import {ErrorManagerModule} from '../org-shared/error-manager/error-manager.module';
 import {CompUtilsModule} from '../org-shared/comp-utils/comp-utils.module';
 
@@ -30,7 +30,7 @@ import {RemoteServicesRestModule} from './app-shared/remote-services-rest/remote
     RemoteServicesRestModule,
     ErrorManagerModule,
     CompUtilsModule.forRoot()  // imported using forRoot() for the same reason as above
-                                // It is critical that forRoott() is called only in theAppModule
+                                // It is critical that forRoot() is called only in theAppModule
                                 // to make sure that PaymentModule (which is lazy loaded)
                                 // uses the same services provided by DI at the root app level.
                                 // If CompUtilsModule.forRoot() is called in the AppSharedModule import

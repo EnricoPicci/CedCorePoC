@@ -8,21 +8,31 @@ import {RemoteLoggerService} from './remote-logger.service';
 
 @Injectable()
 export class ErrorHandlerLogger extends ErrorHandler {
-    constructor(private http: Http, private remoteLogger: RemoteLoggerService) {
+    constructor(
+            private http: Http, 
+            private remoteLogger: RemoteLoggerService) {
         super();
-     }
+        }
 
     handleError(error) {
         console.log('ErrorHandlerLogger');
         let errorLog = new ErrorLog();
+        errorLog.type = 'UNTRAPPED ERROR';
         errorLog.message = error.message;
         errorLog.stack = error.stack;
         errorLog.timestamp = Date.now();
         console.log(errorLog);
         this.remoteLogger.sendLog(errorLog)
-                .subscribe((resp) => {
-                    console.log('Error Log sent to remote logger - ', resp);
+                .subscribe(
+                    (resp) => {console.log('Error Log sent to remote logger - ', resp),
+                    (err) => {
+                        console.log('Error while logging error ', err)
+                    }
                 });
+        alert('Errore inatteso');
+        /*this.router.navigate(['unhandlederror']).then(() => {
+            super.handleError(error);
+        })*/
         super.handleError(error);
     }
 

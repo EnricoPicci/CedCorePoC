@@ -26,7 +26,7 @@ export class CustomerSummaryListComponent implements OnInit {
     let sessionCustomers = this.session.getCustomers();
     let goToRemoteServer = (sessionNdg && !sessionCustomers)  // the session holds an ndg but no customers
     if (goToRemoteServer) {
-      this.getCustomersFromRemoteServer(this.session.getNdg());
+      this.getCustomersFromRemoteServer(sessionNdg);
     } 
     else if (this.session.getCustomers()) {
       this.customers = this.session.getCustomers();
@@ -38,7 +38,7 @@ export class CustomerSummaryListComponent implements OnInit {
       .subscribe(
         (result: Array<Customer>) => {
           this.customers = result;
-          this.session.setCustomers(this.customers);
+          this.session.setCustomers(this.customers, ndg);
         },
         (error) => {console.log(error)}
       )

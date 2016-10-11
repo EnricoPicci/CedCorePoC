@@ -7,4 +7,5 @@
         *ngIf="validationException()" 
         [validationResponse]="this.session.validationResponse">
     </app-payment-validation-exception>
+    <app-error-manager [remoteServiceName]="serviceInError"></app-error-manager>
 </div>

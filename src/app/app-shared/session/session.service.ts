@@ -31,11 +31,15 @@ export class SessionService {
   public getNdg() {
     return this.ndg;
   }
-  public setCustomers(customers: Array<Customer>) {
+  public setCustomers(customers: Array<Customer>, ndg: string) {
     this.customers = customers;
+    if (ndg && customers) {
+      this.setNdg(ndg);
+    } else
     if (customers) {
       this.setNdg(customers[0].ndg);
-    } else {
+    }
+    else {
       this.setNdg(null);
     }
   }
