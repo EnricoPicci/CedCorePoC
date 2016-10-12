@@ -40,12 +40,13 @@ export class PaymentComponent implements OnInit {
         this.server.adv(ndg)
           .subscribe(
             (result: ValidationResponse) => {
-              this.session.validationResponse = result;
-              console.log('Validation service response: ', this.session.validationResponse);
+              this.session.updateAdvValidationResponse(result);
+              console.log('Validation service response: ', this.session.getValidationResponse());
             },
             (error) => {
               this.serviceInError = 'ADV';
               console.log('Error in ADV call');
+              this.session.advValidationResponseInvalid();
               this.server.logServiceError(error, this.serviceInError);
             }
           )
@@ -85,8 +86,8 @@ export class PaymentComponent implements OnInit {
     this.ndgSubscription.unsubscribe();
   }
 
-  validationException() {
-    return this.session.validationResponse != null && this.session.validationResponse.resp == 'KO'
+  advValidationException() {
+    return this.session.isAdvValidationException();
   }
 
 }

@@ -1,19 +1,27 @@
-<div [comp-highlight]="'saddlebrown'"><div class="a2componentname" [comp-highlight-title]>Sepa-payment componentcomponent - Bootstrap4 grid used </div>
-  <div class="row firstRow">
-    <div class="col-sm-2 offset-sm-1">Beneficiario</div>
-    <div class="col-sm-4"><input class="app-pay-input" type="text"/></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-2 offset-sm-1">Importo</div>
-    <div class="col-sm-4"><input class="app-pay-input" type="text"/></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-2 offset-sm-1">Iban</div>
-    <div class="col-sm-8"><app-iban></app-iban></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-2 offset-sm-6">
-      <button (click)="submitPayment()">Invia</button>
+<div [comp-highlight]="'saddlebrown'"><div class="a2componentname" [comp-highlight-title]>
+  Sepa-payment componentcomponent - Bootstrap4 grid used 
+</div>
+  <div  [class.disabled-form]="advValidationException">
+    <div class="row firstRow">
+      <div class="col-sm-2 offset-sm-1">Beneficiario</div>
+      <div class="col-sm-4">
+        <input class="app-pay-input" type="text" adv-validation/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2 offset-sm-1">Importo</div>
+      <div class="col-sm-4">
+        <input class="app-pay-input" type="text" adv-validation/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2 offset-sm-1">Iban</div>
+      <div class="col-sm-8">
+        <app-iban></app-iban>
+      </div>
+      <div class="col-sm-1" *ngIf="!advValidationException">
+        <button (click)="submitPayment()">Invia</button>
+      </div>
     </div>
   </div>
 </div>

@@ -14,7 +14,6 @@ export class CompHighlightDirective {
               private switchService: CompHighlightSwitchService) { }
 
   @Input('comp-highlight') set color(_color: string) {
-    console.log(_color);
     this._color = _color;
     this.highlight(this._color != null);
   };
@@ -35,7 +34,10 @@ export class CompHighlightDirective {
                                     })
   }
   ngOnDestroy() {
-    this.switchSubscription.unsubscribe();
+    console.log('switchSubscription ', this.switchSubscription);
+    if (this.switchSubscription) {
+      this.switchSubscription.unsubscribe();
+    }
   }
   
 }

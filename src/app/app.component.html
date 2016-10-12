@@ -34,6 +34,8 @@
     <a href="http://angular.io"><img src="./assets/images/angular2.jpeg" style="width: 50px; cursor: pointer"/></a>
   </md-toolbar>
 
+  <app-error-manager *ngIf="serviceInError" [remoteServiceName]="serviceInError"></app-error-manager>
+
   <app-functional-area-menu></app-functional-area-menu>
 
   <div class="app-content">

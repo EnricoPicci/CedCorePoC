@@ -29,7 +29,9 @@ export class CompHighlightTitleDirective {
                                     })
   }
   ngOnDestroy() {
-    this.switchSubscription.unsubscribe();
+    if (this.switchSubscription) {
+      this.switchSubscription.unsubscribe();
+    }
   }
   
 }

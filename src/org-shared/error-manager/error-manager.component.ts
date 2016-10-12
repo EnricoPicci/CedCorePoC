@@ -10,12 +10,13 @@ export class ErrorManagerComponent implements OnInit {
   errorMessage: string;
   remoteServiceName: string;
 
-  private remoteServiceMessage = `Errore nel richiamare il servizio remoto ${this.remoteServiceName}. 
-            Provate un paio di volte e se non funziona chiamate il supporto.`;
+  private remoteServiceMessage: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.remoteServiceMessage = `Errore nel richiamare il servizio remoto ${this.remoteServiceName}. 
+            Provate un paio di volte e se non funziona chiamate il supporto.`;
   }
 
   messageToShow() {

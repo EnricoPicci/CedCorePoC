@@ -16,9 +16,13 @@ export class SessionService {
   // Use the updateTabs() method to fire the notification event
   private _tabs = new BehaviorSubject<TabList>(null);
   public tabs$ = this._tabs.asObservable();
+  // SessionService is used to notify other Components if the adv validation failed
+  // Use the updateAdvValidationResponse() method to fire the notification event
+  private advValidationResponse: ValidationResponse;
+  private _advValidationResponse = new BehaviorSubject<ValidationResponse>(null);
+  public advValidationResponse$ = this._advValidationResponse.asObservable();
 
   private customers: Array<Customer>;
-  public validationResponse: ValidationResponse;
 
   constructor() { }
 
@@ -58,5 +62,21 @@ export class SessionService {
   // use updateTabs() to fire the notification that tabs have changed
   public updateTabs(tabs: TabList) {
     this._tabs.next(tabs);
+  }
+
+  updateAdvValidationResponse(validationResponse: ValidationResponse) {
+    this.advValidationResponse = validationResponse;
+    this._advValidationResponse.next(validationResponse);
+  }
+  getValidationResponse() {
+    return this.advValidationResponse;
+  }
+  isAdvValidationException(): boolean {
+    return this.advValidationResponse != null && this.advValidationResponse.resp == 'KO'
+  }
+  advValidationResponseInvalid() {
+    let validationResponse = <ValidationResponse>{};
+    validationResponse.resp = 'KO';
+    this.updateAdvValidationResponse(validationResponse);
   }
 }

@@ -6,6 +6,7 @@ import {SessionService} from '../session/session.service';
 import {RemoteServicesInterface} from '../remote-services-interface/remote-services.interface';
 import {REMOTE_SERVICE_INTERFACE} from '../remote-services-interface/remote-services.token';
 import {Customer} from '../remote-services-interface/customer';
+import {Rapporto} from '../remote-services-interface/rapporto';
 
 @Component({
   selector: 'app-customer-summary-list',
@@ -14,7 +15,7 @@ import {Customer} from '../remote-services-interface/customer';
 })
 export class CustomerSummaryListComponent implements OnInit {
   customers: Array<Customer>;
-  private ndgSubscription: Subscription;
+  private serviceInError;
 
   constructor(
     private session: SessionService,
@@ -22,6 +23,9 @@ export class CustomerSummaryListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let emptyCustomer = <Customer>{};
+    emptyCustomer.rapporti = [<Rapporto>{}];
+    this.customers = [emptyCustomer];
     let sessionNdg = this.session.getNdg();
     let sessionCustomers = this.session.getCustomers();
     let goToRemoteServer = (sessionNdg && !sessionCustomers)  // the session holds an ndg but no customers
@@ -34,13 +38,16 @@ export class CustomerSummaryListComponent implements OnInit {
   }
 
   getCustomersFromRemoteServer(ndg?: string) {
-    this.server.getCustomers(ndg)
-      .subscribe(
+   this.server.getCustomers(ndg).subscribe(
         (result: Array<Customer>) => {
           this.customers = result;
           this.session.setCustomers(this.customers, ndg);
         },
-        (error) => {console.log(error)}
+        (error) => {
+          this.serviceInError = 'GET CUSTOMERS';
+          console.log('Error in GET CUSTOMERS call');
+          this.server.logServiceError(error, this.serviceInError);
+        }
       )
   }
 

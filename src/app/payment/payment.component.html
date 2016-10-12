@@ -1,11 +1,13 @@
 
 <div [comp-highlight]="'yellow'"><div class="a2componentname" [comp-highlight-title]>Payment </div>
     
+    <app-error-manager *ngIf="serviceInError" [remoteServiceName]="serviceInError"></app-error-manager>
+
     <app-customer-summary-list></app-customer-summary-list>
     <router-outlet></router-outlet>
     <app-payment-validation-exception 
-        *ngIf="validationException()" 
-        [validationResponse]="this.session.validationResponse">
+        *ngIf="advValidationException()" 
+        [validationResponse]="this.session.advValidationResponse">
     </app-payment-validation-exception>
-    <app-error-manager [remoteServiceName]="serviceInError"></app-error-manager>
+    
 </div>

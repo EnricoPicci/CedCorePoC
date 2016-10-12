@@ -14,6 +14,7 @@ import {REMOTE_SERVICE_INTERFACE} from './app-shared/remote-services-interface/r
 export class AppComponent implements OnInit {
   moduleRoutes: Route[];
   tabs: Array<Tab>;
+  private serviceInError: string;
 
   constructor(
     private router: Router,
@@ -35,9 +36,14 @@ export class AppComponent implements OnInit {
       }
     });
 
-    this.server.getModules().subscribe((moduleRoutes) => {
-      this.moduleRoutes = moduleRoutes;
-    })
+    this.server.getModules().subscribe(
+      (moduleRoutes) => {this.moduleRoutes = moduleRoutes;},
+      (error) => {
+        this.serviceInError = 'GET MODULES';
+        console.log('Error in GET MODULES call');
+        this.server.logServiceError(error, this.serviceInError);
+      }
+    )
   }
 
   // before leaving the app a context object is written on a remote DB

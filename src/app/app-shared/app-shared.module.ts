@@ -33,12 +33,16 @@ import { IbanComponent } from './iban/iban.component';
 
 import {CompUtilsModule} from '../../org-shared/comp-utils/comp-utils.module';
 import {ErrorManagerModule} from '../../org-shared/error-manager/error-manager.module';
+import { AdvValidationDirective } from './adv/adv-validation.directive';
 
 @NgModule({
   declarations: [
     FunctionalAreaMenuComponent, 
     CustomerSummaryComponent, 
-    IbanPipe, IbanComponent, CustomerSummaryListComponent
+    IbanPipe, 
+    IbanComponent,
+    CustomerSummaryListComponent, 
+    AdvValidationDirective
   ],
   imports: [
     CommonModule,
@@ -59,8 +63,11 @@ import {ErrorManagerModule} from '../../org-shared/error-manager/error-manager.m
   ],
   exports: [
     FunctionalAreaMenuComponent,
-    CustomerSummaryComponent, CustomerSummaryListComponent,
-    IbanPipe, IbanComponent,
+    CustomerSummaryComponent, 
+    CustomerSummaryListComponent,
+    IbanPipe, 
+    IbanComponent,
+    AdvValidationDirective,
     MdSidenavModule,
     MdToolbarModule,
     MdButtonModule,

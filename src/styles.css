@@ -19,3 +19,10 @@
   background-color: lightgray;
   /*display: none;*/
 }
+
+.disabled-form {
+  background-color: lightgray;
+}
+.disabled-input {
+  background-color: lightslategray;
+}

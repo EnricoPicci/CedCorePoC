@@ -5,22 +5,20 @@ import { HttpModule } from '@angular/http';
 import { ErrorManagerComponent } from './error-manager.component';
 import {ErrorHandlerLogger} from './error-handler-logger';
 import {RemoteLoggerService} from './remote-logger.service';
-//import {UnhandledErrorComponent} from './unhandled-error.component';
 
-//import {errorManagerRouting} from './error-manager.routing';
+import {CompUtilsModule} from '../comp-utils/comp-utils.module';
 
 @NgModule({
     declarations: [
-        ErrorManagerComponent,
-        //UnhandledErrorComponent
+        ErrorManagerComponent
     ],
     exports: [
         ErrorManagerComponent
     ],
     imports: [
         CommonModule,
-        HttpModule
-        //errorManagerRouting 
+        HttpModule,
+        CompUtilsModule
     ],
     providers: [
         RemoteLoggerService,

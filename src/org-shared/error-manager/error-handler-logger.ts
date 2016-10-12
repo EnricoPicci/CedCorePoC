@@ -10,7 +10,8 @@ import {RemoteLoggerService} from './remote-logger.service';
 export class ErrorHandlerLogger extends ErrorHandler {
     constructor(
             private http: Http, 
-            private remoteLogger: RemoteLoggerService) {
+            private remoteLogger: RemoteLoggerService
+            ) {
         super();
         }
 
@@ -30,9 +31,6 @@ export class ErrorHandlerLogger extends ErrorHandler {
                     }
                 });
         alert('Errore inatteso');
-        /*this.router.navigate(['unhandlederror']).then(() => {
-            super.handleError(error);
-        })*/
         super.handleError(error);
     }
 

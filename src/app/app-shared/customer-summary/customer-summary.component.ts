@@ -29,40 +29,13 @@ export class CustomerSummaryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /*this.ndgSubscription = this.session.ndg$.subscribe((ndg) => {
-      console.log('cust summary subscribe ', ndg);
-      if (ndg && this.customer && (ndg != this.customer.ndg)) { // a new ndg has been pushed in the session
-        this.getCustomerFromRemoteServer(ndg);
-      }
-    })
-    if (this.session.getCustomer()) {
-      this.setCustomerForView(this.session.getCustomer());
-    } 
-    else {
-      this.setSearchMode();
-    }*/
-    //let sessionNdg = this.session.getNdg();
     let sessionCustomers = this.session.getCustomers();
-    //let goToRemoteServer = (sessionNdg && !sessionCustomers)  // the session holds an ndg but not a customer
-    /*let goToRemoteServer = (this.session.getNdg() != null && this.session.getCustomer() == null) ||
-                            (this.session.getCustomer() != null && 
-                                this.session.getCustomer().ndg != this.session.getNdg());*/
-    //if (goToRemoteServer) {
-      //this.getCustomersFromRemoteServer(this.session.getNdg());
-    //} else {
-      if (this.customer) {
-        this.setCustomerForView(this.customer);
-      } else {
-        this.setSearchMode();
-      }
-   // }
+    if (this.customer) {
+      this.setCustomerForView(this.customer);
+    } else {
+      this.setSearchMode();
+    }
   }
-
-  // it is critical to unsubscribe subscriptions when a Component is destroyed to avoid memory leaks
-  // subscriptions not unsubscribed remain active when a Component is destroyed unless explicitely destroyed
-  /*ngOnDestroy() {
-    this.ndgSubscription.unsubscribe();
-  }*/
 
   search() {
     if (!this.searchMode) {
