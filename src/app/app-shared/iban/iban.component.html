@@ -1,5 +1,9 @@
 <div [comp-highlight]="'blue'"><div class="a2componentname" [comp-highlight-title]>Functional-area-menu component</div>
-      <input #ibanInput [(ngModel)]="iban" placeholder="IBAN" (keyup)="onKeyUp(ibanInput.value)" 
-            maxlength="27" style="width: 50%" [class.invalid]="!valid" adv-validation/>
+
+      <input #ibanInput [(ngModel)]="iban" placeholder="IBAN" 
+            (keyup)="onKeyUp(ibanInput.value)"
+            [maxlength]="ibanLength" style="width: 50%" [class.invalid]="!isValid()" 
+            [disabled]="session.isAdvValidationException()"  session-disable session-processing/>
       {{iban | iban}}
+      
 </div>

@@ -1,11 +1,11 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
-import { AdvValidationDirective } from './adv-validation.directive';
+import { SessionDisableDirective } from './session-disable.directive';
 
-/*describe('Directive: AdvValidation', () => {
+/*describe('Directive: SessionDisable', () => {
   it('should create an instance', () => {
-    let directive = new AdvValidationDirective();
+    let directive = new SessionDisableDirective();
     expect(directive).toBeTruthy();
   });
 });*/

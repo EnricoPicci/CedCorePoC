@@ -1,5 +1,6 @@
 
 <div [comp-highlight]="'blue'"><div class="a2componentname" [comp-highlight-title]>Adv component</div>
-  <app-document></app-document>
+  <app-document *ngFor="let customer of getCustomers()" [customer]="customer" 
+      (docverified)="setDocVerified($event)"></app-document>
   <button (click)="documentsUpdated()">Aggiorna</button>
 </div>

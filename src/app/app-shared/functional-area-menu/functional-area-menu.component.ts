@@ -34,6 +34,8 @@ export class FunctionalAreaMenuComponent implements OnInit, OnDestroy {
         this.tabs = tabList.tabs;
         this.selectedTabIndex = tabList.selectedTabIndex;
         this.path = tabList.parentPath;
+      } else {
+        this.tabs = null;
       }
     })
   }

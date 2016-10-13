@@ -79,6 +79,14 @@ it('branchCode not valid', () => {
 
 /* validatePartial */
 it('country code valid', () => {
+    let iban = null;
+    expect(Iban.validatePartial(iban)).toBe(true);
+});
+it('country code valid', () => {
+    let iban = '';
+    expect(Iban.validatePartial(iban)).toBe(true);
+});
+it('country code valid', () => {
     let iban = 'I';
     expect(Iban.validatePartial(iban)).toBe(true);
 });

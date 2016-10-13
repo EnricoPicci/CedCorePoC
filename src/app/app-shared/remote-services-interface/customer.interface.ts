@@ -1,4 +1,4 @@
-import {Rapporto} from './rapporto';
+import {Rapporto} from './rapporto.interface';
 
 export interface Customer {
     customerId: string;

@@ -4,10 +4,12 @@
     <app-error-manager *ngIf="serviceInError" [remoteServiceName]="serviceInError"></app-error-manager>
 
     <app-customer-summary-list></app-customer-summary-list>
-    <router-outlet></router-outlet>
+    
     <app-payment-validation-exception 
         *ngIf="advValidationException()" 
         [validationResponse]="this.session.advValidationResponse">
     </app-payment-validation-exception>
+
+    <router-outlet></router-outlet>
     
 </div>

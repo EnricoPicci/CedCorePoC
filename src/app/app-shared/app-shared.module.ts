@@ -34,6 +34,9 @@ import { IbanComponent } from './iban/iban.component';
 import {CompUtilsModule} from '../../org-shared/comp-utils/comp-utils.module';
 import {ErrorManagerModule} from '../../org-shared/error-manager/error-manager.module';
 import { AdvValidationDirective } from './adv/adv-validation.directive';
+import { SessionDisableDirective } from './session/session-disable.directive';
+import { SessionProcessingDirective } from './session/session-processing.directive';
+import { SessionProcessingSpinningDirective } from './session/session-processing-spinning.directive';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import { AdvValidationDirective } from './adv/adv-validation.directive';
     IbanPipe, 
     IbanComponent,
     CustomerSummaryListComponent, 
-    AdvValidationDirective
+    AdvValidationDirective, 
+    SessionDisableDirective, 
+    SessionProcessingDirective, 
+    SessionProcessingSpinningDirective
   ],
   imports: [
     CommonModule,
@@ -68,6 +74,7 @@ import { AdvValidationDirective } from './adv/adv-validation.directive';
     IbanPipe, 
     IbanComponent,
     AdvValidationDirective,
+    SessionDisableDirective,
     MdSidenavModule,
     MdToolbarModule,
     MdButtonModule,
@@ -82,7 +89,9 @@ import { AdvValidationDirective } from './adv/adv-validation.directive';
     MdTooltipModule,
     MdCheckboxModule,
     CompUtilsModule,
-    ErrorManagerModule
+    ErrorManagerModule,
+    SessionProcessingDirective,
+    SessionProcessingSpinningDirective
   ], 
   // This module can be shared also by Modules which are lazy-loaded
   // We want though to have only one instance of SessionService in the whole app (a Singleton)

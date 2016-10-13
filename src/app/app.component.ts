@@ -51,7 +51,10 @@ export class AppComponent implements OnInit {
   beforeUnloadHander(event) {
     // not very useful to log in beforeUnloadHander, but still ...
     console.log('AppComponent beforeUnloadHander');
-    let context = {timestamp: Date.now(), ndg: this.session.getNdg()};
+    let context = {
+      timestamp: Date.now(), 
+      data: {ndg: this.session.getNdg()}
+    };
     this.server.saveContext(context).subscribe(() => {
       console.log('AppComponent context saved ', context);
     })

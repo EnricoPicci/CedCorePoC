@@ -5,8 +5,8 @@ import {SessionService} from '../session/session.service';
 
 import {RemoteServicesInterface} from '../remote-services-interface/remote-services.interface';
 import {REMOTE_SERVICE_INTERFACE} from '../remote-services-interface/remote-services.token';
-import {Customer} from '../remote-services-interface/customer';
-import {Rapporto} from '../remote-services-interface/rapporto';
+import {Customer} from '../remote-services-interface/customer.interface';
+import {Rapporto} from '../remote-services-interface/rapporto.interface';
 
 @Component({
   selector: 'app-customer-summary-list',

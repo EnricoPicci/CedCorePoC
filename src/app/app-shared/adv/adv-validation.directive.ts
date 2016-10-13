@@ -7,10 +7,10 @@ import {SessionService} from '../../app-shared/session/session.service';
   selector: '[adv-validation]'
 })
 export class AdvValidationDirective {
-  advValidationExceptionSubscription: Subscription;
-  @HostBinding('class.disabled-form') validationException1 = false;
-  @HostBinding('class.disabled-input') validationException2 = false;
-  @HostBinding('disabled') validationException3 = false;
+  subscription: Subscription;
+  @HostBinding('class.disabled-form') disableForm = false;
+  @HostBinding('class.disabled-input') disableInput = false;
+  @HostBinding('disabled') disabled = false;
 
   constructor(private el: ElementRef, 
               private renderer: Renderer,
@@ -18,16 +18,17 @@ export class AdvValidationDirective {
 
   ngOnInit() {
     console.log('AdvValidationDirective subscribes to advValidationResponse');
-    this.advValidationExceptionSubscription = 
+    this.subscription = 
             this.session.advValidationResponse$.subscribe((resp) => {
-              this.validationException1 = this.session.isAdvValidationException();
-              this.validationException2 = this.session.isAdvValidationException();
-              this.validationException3 = this.session.isAdvValidationException();
+              let isAdvException = this.session.isAdvValidationException();
+              this.disableForm = isAdvException;
+              this.disableInput = isAdvException;
+              this.disabled = isAdvException;
             })
   }
   ngOnDestroy() {
     console.log('AdvValidationDirective unsubscribes to advValidationResponse');
-    this.advValidationExceptionSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 }

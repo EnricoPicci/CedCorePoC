@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject }    from 'rxjs/BehaviorSubject';
 
 import {TabList} from '../../app-shared/functional-area-menu/tab-list';
-import {Customer} from '../remote-services-interface/customer';
-import {ValidationResponse} from '../remote-services-interface/validation-response';
+import {Customer} from '../remote-services-interface/customer.interface';
+import {ValidationResponse} from '../remote-services-interface/validation-response.interface';
 
 @Injectable()
 export class SessionService {
@@ -16,11 +16,22 @@ export class SessionService {
   // Use the updateTabs() method to fire the notification event
   private _tabs = new BehaviorSubject<TabList>(null);
   public tabs$ = this._tabs.asObservable();
+  // SessionService is used to notify other Components if they have to be disabled or if 
+  // the app is processing something (e.g. e remote service)
+  // It is used by SessionDisableDirective and SessionProcessingDirective which subscribe to the specific event.
+  private sessionDisable: boolean;
+  private _sessionDisable = new BehaviorSubject<boolean>(false);
+  public sessionDisable$ = this._sessionDisable.asObservable();
+  private sessionProcessing: boolean;
+  private _sessionProcessing = new BehaviorSubject<boolean>(false);
+  public sessionProcessing$ = this._sessionProcessing.asObservable();
+
   // SessionService is used to notify other Components if the adv validation failed
   // Use the updateAdvValidationResponse() method to fire the notification event
   private advValidationResponse: ValidationResponse;
   private _advValidationResponse = new BehaviorSubject<ValidationResponse>(null);
   public advValidationResponse$ = this._advValidationResponse.asObservable();
+  public skipAdvValidation = false;
 
   private customers: Array<Customer>;
 
@@ -30,12 +41,14 @@ export class SessionService {
   // the subscribers to the ndg$ observable can react accordingly
   // used by ADV to signal to Payment that something has changed so that Payment can run again the checks
   public updateNdg() {
+    console.log('Session updateNdg  ', this.ndg);
     this._ndg.next(this.ndg);
   }
   public getNdg() {
     return this.ndg;
   }
   public setCustomers(customers: Array<Customer>, ndg: string) {
+    console.log('Session set customers ', customers, ' ndg ', ndg);
     this.customers = customers;
     if (ndg && customers) {
       this.setNdg(ndg);
@@ -51,10 +64,7 @@ export class SessionService {
     return this.customers;
   }
   private setNdg(ndg: string) {
-    console.log('ndg  ', ndg);
-    if (this.ndg && this.ndg !== ndg) {
-      this.customers = null;
-    }
+    console.log('Session setNdg  ', ndg);
     this.ndg = ndg;
     this._ndg.next(ndg);
   }
@@ -62,6 +72,22 @@ export class SessionService {
   // use updateTabs() to fire the notification that tabs have changed
   public updateTabs(tabs: TabList) {
     this._tabs.next(tabs);
+  }
+  public removeFunctionalAreaMenu() {
+    this._tabs.next(null);
+  }
+
+  disableSession() {
+    this.sessionDisable = true;
+    this._sessionDisable.next(true);
+  }
+  enableSession() {
+    this.sessionDisable = false;
+    this._sessionDisable.next(false);
+  }
+  processing(value: boolean) {
+    this.sessionProcessing = value;
+    this._sessionProcessing.next(value);
   }
 
   updateAdvValidationResponse(validationResponse: ValidationResponse) {
@@ -72,7 +98,8 @@ export class SessionService {
     return this.advValidationResponse;
   }
   isAdvValidationException(): boolean {
-    return this.advValidationResponse != null && this.advValidationResponse.resp == 'KO'
+    let resp = this.advValidationResponse != null && this.advValidationResponse.resp == 'KO';
+    return resp;
   }
   advValidationResponseInvalid() {
     let validationResponse = <ValidationResponse>{};

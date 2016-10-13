@@ -34,7 +34,6 @@ export class CompHighlightDirective {
                                     })
   }
   ngOnDestroy() {
-    console.log('switchSubscription ', this.switchSubscription);
     if (this.switchSubscription) {
       this.switchSubscription.unsubscribe();
     }

@@ -5,7 +5,7 @@ import {SessionService} from '../session/session.service';
 
 import {RemoteServicesInterface} from '../remote-services-interface/remote-services.interface';
 import {REMOTE_SERVICE_INTERFACE} from '../remote-services-interface/remote-services.token';
-import {Customer} from '../remote-services-interface/customer';
+import {Customer} from '../remote-services-interface/customer.interface';
 
 @Component({
   selector: 'app-customer-summary',
@@ -22,6 +22,8 @@ export class CustomerSummaryComponent implements OnInit {
   rapportoId: string;
   //private ndgSubscription: Subscription;
   private customersRetrieved = new EventEmitter();
+
+  serviceInError: string;
 
   constructor(
     private session: SessionService,
@@ -42,17 +44,20 @@ export class CustomerSummaryComponent implements OnInit {
       this.setSearchMode();
     } else {
       this.getCustomersFromRemoteServer(null, this.customer.cognome);
-      this.disableSearchMode();
+      this.disableSearchMode(false);
     }
   }
   setSearchMode() {
     this.searchMode = true;
     this._customer = this.customer;
     this.customer = <Customer>{};
+    this.session.skipAdvValidation = false;
   }
-  disableSearchMode() {
+  disableSearchMode(reset: boolean) {
     this.searchMode = false;
-    this.customer = this._customer;
+    if (reset) {
+      this.customer = this._customer;
+    }
   }
 
   getCustomersFromRemoteServer(ndg?: string, cognome?: string) {
@@ -60,13 +65,17 @@ export class CustomerSummaryComponent implements OnInit {
       .subscribe(
         (result: Array<Customer>) => {
           if (result && result.length > 0) {
+            console.log('Customer retrieved ', result[0]);
             this.setCustomerForView(result[0]);
           }
           this.customersRetrieved.next();
           this.session.setCustomers(result, ndg);
-
         },
-        (error) => {console.log(error)}
+        (error) => {
+          this.serviceInError = 'GET CUSTOMER';
+          console.log('Error in GET CUSTOMER call');
+          this.server.logServiceError(error, this.serviceInError);
+        }
       )
   }
   setCustomerForView(customer: Customer) {

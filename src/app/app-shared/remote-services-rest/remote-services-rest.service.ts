@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import './rxjs-operators';
 
 import {RemoteServicesInterface} from '../remote-services-interface/remote-services.interface';
-import {Customer} from '../remote-services-interface/customer';
-import {ValidationResponse} from '../remote-services-interface/validation-response';
+import {Customer} from '../remote-services-interface/customer.interface';
+import {ValidationResponse} from '../remote-services-interface/validation-response.interface';
+import {Payment} from '../remote-services-interface/payment.interface';
+import {SubmissionResponse} from '../remote-services-interface/submission-response.interface';
+import {RemoteServiceError} from '../remote-services-interface/remote-service-error.interface';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
@@ -53,6 +56,15 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
                     .map(this.extractData)
                     .catch(this.handleError);
     }
+    sendPayment(payment: Payment) {
+        let url = environment.baseServicesUrl + 'payment';
+        return this.http.post(url, payment, this.getOptions())
+                    .map(this.extractData)
+                    .map((json) => {
+                        return <SubmissionResponse>json
+                    })
+                    .catch(this.handleError);
+    }
     logServiceError(errorMessage: any, serviceName: string) {
         let errorJson = {
             type: 'SERVICE ERROR',
@@ -62,6 +74,8 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
         }
         let url = environment.loggerUrl + 'log';
         console.log('logServiceError ', errorJson);
+        // the subscribe() method is called immediatly so that the post gets immediatly executed
+        // the clients calling this method do not have to bother about the results (fire and forget pattern)
         this.http.post(url, errorJson, this.getOptions())
                     .map(this.extractData)
                     .subscribe((respData) => {console.log('Log service response ', respData)})
@@ -77,9 +91,15 @@ export class RemoteServicesRestService implements RemoteServicesInterface {
         return body || {};
     }
     private handleError (error: any) {
+        let errorBody = error.json();
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error ';
-        console.error('handleError', errMsg); 
-        return Observable.throw(errMsg);
+        let errorData = <RemoteServiceError>{
+            status: error.status,
+            message: errMsg,
+            body: errorBody
+        }
+        console.error('handleError ', errorData); 
+        return Observable.throw(errorData);
     }
 }

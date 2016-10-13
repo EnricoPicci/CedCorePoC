@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {ValidationResponse} from '../../app-shared/remote-services-interface/validation-response'
+import {ValidationResponse} from '../../app-shared/remote-services-interface/validation-response.interface';
 
 @Component({
   selector: 'app-payment-validation-exception',
@@ -18,6 +18,7 @@ export class PaymentValidationExceptionComponent implements OnInit {
   }
 
   navigate() {
+    // we assume that 501 is the code for ADV validation exception
     if (this.validationResponse.retCode == "501") {
       this.router.navigate(['adv']);
     }

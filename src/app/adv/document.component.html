@@ -15,9 +15,9 @@
   </div-->
 
   <md-card>
-    <app-customer-summary [searchEnabled]="false"></app-customer-summary>
+    <app-customer-summary [searchEnabled]="false" [customer]="customer"></app-customer-summary>
     <md-card>
-      <md-checkbox [checked]="true" align="end">
+      <md-checkbox [(ngModel)]="verified" (change)="docVerified($event)" align="end">
         Verificato
       </md-checkbox>
     </md-card>

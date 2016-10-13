@@ -1,27 +1,40 @@
-<div [comp-highlight]="'saddlebrown'"><div class="a2componentname" [comp-highlight-title]>
-  Sepa-payment componentcomponent - Bootstrap4 grid used 
-</div>
-  <div  [class.disabled-form]="advValidationException">
+<div [comp-highlight]="'saddlebrown'">
+  <div class="a2componentname" [comp-highlight-title]>
+    Sepa-payment componentcomponent - Bootstrap4 grid used 
+  </div>
+
+  <app-error-manager *ngIf="serviceInError || errorMessage" 
+    [remoteServiceName]="serviceInError" [errorMessage]="errorMessage"></app-error-manager>
+
+    <div session-processing-spinning></div>
+    
+  <div>
     <div class="row firstRow">
       <div class="col-sm-2 offset-sm-1">Beneficiario</div>
       <div class="col-sm-4">
-        <input class="app-pay-input" type="text" adv-validation/>
+        <input class="app-pay-input" type="text" [(ngModel)]="payment.beneficiary" 
+            [disabled]="session.isAdvValidationException()" session-disable session-processing/>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-2 offset-sm-1">Importo</div>
       <div class="col-sm-4">
-        <input class="app-pay-input" type="text" adv-validation/>
+        <input class="app-pay-input" type="text" [(ngModel)]="payment.amount" 
+            [disabled]="session.isAdvValidationException()"  session-disable session-processing/>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-2 offset-sm-1">Iban</div>
       <div class="col-sm-8">
-        <app-iban></app-iban>
+        <app-iban [iban]="payment.iban" (validIbanChanged)="setIban($event)"></app-iban>
       </div>
-      <div class="col-sm-1" *ngIf="!advValidationException">
-        <button (click)="submitPayment()">Invia</button>
+      <div class="col-sm-1" *ngIf="!advValidationException && paymentDataComplete()">
+        <button *ngIf="!session.sessionDisable" (click)="submitPayment()" session-processing>Invia</button>
+        <button *ngIf="session.sessionDisable" (click)="reset()">Pulisci</button>
       </div>
+    </div>
+    <div *ngIf="submitOKMessage" class="row">
+      <div class="col-sm-5 offset-sm-2" style="color: green">{{submitOKMessage}}</div>
     </div>
   </div>
 </div>

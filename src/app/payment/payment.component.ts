@@ -7,7 +7,7 @@ import {Tab} from '../app-shared/functional-area-menu/tab';
 import {TabList} from '../app-shared/functional-area-menu/tab-list';
 import {RemoteServicesInterface} from '../app-shared/remote-services-interface/remote-services.interface';
 import {REMOTE_SERVICE_INTERFACE} from '../app-shared/remote-services-interface/remote-services.token';
-import {ValidationResponse} from '../app-shared/remote-services-interface/validation-response';
+import {ValidationResponse} from '../app-shared/remote-services-interface/validation-response.interface';
 
 @Component({
   selector: 'app-payment',
@@ -36,7 +36,7 @@ export class PaymentComponent implements OnInit {
     console.log('PaymentComponent subscribes to ndg$  ');
     this.ndgSubscription = this.session.ndg$.subscribe((ndg) => {
       console.log('PaymentComponent subscription to ndg$ fired with ndg: ', ndg);
-      if (ndg) {
+      if (ndg && !this.session.skipAdvValidation) {
         this.server.adv(ndg)
           .subscribe(
             (result: ValidationResponse) => {
