@@ -1,7 +1,4 @@
 import { ErrorHandler, Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
-import './rxjs-operators';
 
 import {ErrorLog} from './error-log';
 import {RemoteLoggerService} from './remote-logger.service';
@@ -9,7 +6,6 @@ import {RemoteLoggerService} from './remote-logger.service';
 @Injectable()
 export class ErrorHandlerLogger extends ErrorHandler {
     constructor(
-            private http: Http, 
             private remoteLogger: RemoteLoggerService
             ) {
         super();
@@ -33,6 +29,4 @@ export class ErrorHandlerLogger extends ErrorHandler {
         alert('Errore inatteso');
         super.handleError(error);
     }
-
-
 }

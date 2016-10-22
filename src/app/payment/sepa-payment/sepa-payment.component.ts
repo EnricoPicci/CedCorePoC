@@ -55,6 +55,7 @@ export class SepaPaymentComponent implements OnInit, OnDestroy {
 
   submitPayment() {
     this.session.processing(true);
+    this.session.disableSession();
     this.server.sendPayment(this.payment).subscribe(
             (result: SubmissionResponse) => {
               this.session.processing(false);
@@ -63,7 +64,6 @@ export class SepaPaymentComponent implements OnInit, OnDestroy {
             },
             (error: RemoteServiceError) => {
               this.session.processing(false);
-              this.session.disableSession();
               if (error.status == 499) {
                 this.errorMessage = 'Il pagamento non sappiamo se è stato processato - devi guardare sui pending';
               } else {

@@ -3,11 +3,14 @@ import { NgModule } from '@angular/core';
 import { DynamicRoute2Component } from './dynamic-route-2.component';
 import {dynamicRoute2Routing} from './dynamic-route-2.routing';
 
+import {AppSharedModule} from '../app/app-shared/app-shared.module';
+
 @NgModule({
   declarations: [
       DynamicRoute2Component
   ],
   imports: [
+    AppSharedModule,
     dynamicRoute2Routing // A lazy loaded module needs to declare its own Router otherwise it gets loaded but does
                           // not know where to go
   ],

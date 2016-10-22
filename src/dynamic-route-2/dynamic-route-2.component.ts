@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import {SessionService} from '../app/app-shared/session/session.service';
+
 @Component({
   selector: 'app-dynamic-route-2',
   templateUrl: './dynamic-route-2.component.html',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DynamicRoute2Component implements OnInit {
 
-  constructor() { }
+  constructor(private session: SessionService) { }
 
   ngOnInit() {
+    this.session.removeFunctionalAreaMenu();
   }
 
 }
